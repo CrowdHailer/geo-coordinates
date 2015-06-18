@@ -11,9 +11,30 @@ function GeoCoordinates(lat, lon){
     Object.defineProperty(this, 'longitude', {value: lon});
 }
 
-GeoCoordinates.create = function(lat, lon){
-  return new GeoCoordinates(lat, lon);
+GeoCoordinates.prototype.toString = function(){
+    // TODO test
+    var north = this.latitude > 0;
+    var east = this.longitude > 0;
+    var latitude = north ? '' + this.latitude + 'N' : '' + (-1 * this.latitude) + 'S';
+    var longitude = east ? '' + this.longitude + 'E' : '' + (-1 * this.longitude) + 'W';
+    return latitude + ', ' + longitude;
 };
+
+GeoCoordinates.prototype.round = function(dp){
+    // TODO test
+    var r = require('round-decimal/decimal-places')(dp);
+    return GeoCoordinates.create(r(this.latitude), r(this.longitude));
+}
+
+GeoCoordinates.create = function(lat, lon){
+    return new GeoCoordinates(lat, lon);
+};
+
+GeoCoordinates.from_place = function(place) {
+    // TODO test
+    return new GeoCoordinates(place.latitude, place.longitude);
+};
+
 GeoCoordinates.parse = function(address) {
     var match, latitude, longitude;
     if (match = address.match(/(\d+)([NS])[,\.]?\s*(\d+)([EW])/i)) {
