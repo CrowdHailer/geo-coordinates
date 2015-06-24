@@ -21,10 +21,10 @@ GeoCoordinates.prototype.toString = function(){
 };
 
 GeoCoordinates.prototype.round = function(dp){
-    // TODO test
-    var r = require('round-decimal/decimal-places')(dp);
-    return GeoCoordinates.create(r(this.latitude), r(this.longitude));
-}
+    var latitude = parseFloat(this.latitude.toFixed(dp));
+    var longitude = parseFloat(this.longitude.toFixed(dp));
+    return GeoCoordinates.create(latitude, longitude);
+};
 
 GeoCoordinates.create = function(lat, lon){
     return new GeoCoordinates(lat, lon);

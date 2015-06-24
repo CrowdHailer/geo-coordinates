@@ -1,6 +1,6 @@
 {
   "name": "geo-coordinates",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Generation methods for schema.org compliant GeoCoordinates",
   "main": "geo-coordinates.js",
   "scripts": {
