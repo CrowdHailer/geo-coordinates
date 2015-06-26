@@ -40,18 +40,16 @@ GeoCoordinates.parse = function(address) {
     if (match = address.match(/(\d+)([NS])[,\.]?\s*(\d+)([EW])/i)) {
         latitude = /N/i.test(match[2]) ? parseFloat(match[1]) : - parseFloat(match[1]);
         longitude = /E/i.test(match[4]) ? parseFloat(match[3]) : - parseFloat(match[3]);
-        return {latitude: latitude, longitude: longitude};
     } else if (match = address.match(/(\d+)([EW])[,\.]?\s*(\d+)([NS])/i)) {
         latitude = /N/i.test(match[4]) ? parseFloat(match[3]) : - parseFloat(match[3]);
         longitude = /E/i.test(match[2]) ? parseFloat(match[1]) : - parseFloat(match[1]);
-        return {latitude: latitude, longitude: longitude};
     } else if (match = address.match(/(-?\d+), (-?\d+)/)) {
         latitude = parseFloat(match[1]);
         longitude = parseFloat(match[2]);
-        return {latitude: latitude, longitude: longitude};
     } else {
         return null;
     }
+    return GeoCoordinates.create(latitude, longitude);
 };
 
 module.exports = GeoCoordinates;
